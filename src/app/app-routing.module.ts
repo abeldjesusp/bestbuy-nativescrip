@@ -9,20 +9,20 @@ const routes: Routes = [
     loadChildren: () => import('~/app/home/home.module').then((m) => m.HomeModule),
   },
   {
-    path: 'browse',
-    loadChildren: () => import('~/app/browse/browse.module').then((m) => m.BrowseModule),
+    path: 'cart',
+    loadChildren: () => import('~/app/cart/cart.module').then((m) => m.CartModule),
   },
   {
     path: 'search',
     loadChildren: () => import('~/app/search/search.module').then((m) => m.SearchModule),
   },
   {
-    path: 'featured',
-    loadChildren: () => import('~/app/featured/featured.module').then((m) => m.FeaturedModule),
+    path: 'product-list/:id/:name',
+    loadChildren: () => import('~/app/product-list/product.module').then((m) => m.ProductModule),
   },
   {
-    path: 'settings',
-    loadChildren: () => import('~/app/settings/settings.module').then((m) => m.SettingsModule),
+    path: 'product-detail',
+    loadChildren: () => import('~/app/product-detail/product-detail.module').then((m) => m.ProductDetailModule),
   },
 ]
 

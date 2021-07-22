@@ -1,13 +1,40 @@
-<ActionBar class="action-bar">
-    <NavigationButton visibility="hidden"></NavigationButton>
-    <GridLayout columns="50, *">
-        <Label class="action-bar-title" text="Home" colSpan="2"></Label>
-
-        <Label class="fas" text="&#xf0c9;" (tap)="onDrawerButtonTap()"></Label>
-    </GridLayout>
-</ActionBar>
+<ns-action-bar text="Home"></ns-action-bar>
 
 <GridLayout class="page__content">
-  <Label class="page__content-icon fas" text="&#xf015;"></Label>
-  <Label class="page__content-placeholder" text="<!-- Page content goes here -->"></Label>
+  <ActivityIndicator [busy]="isBusy">
+  </ActivityIndicator>
+  
+  <GridLayout rows="50, *, 30" >
+    <StackLayout row="0" orientation="horizontal" marginTop="5">
+      <Label  
+        [text]="breadCrumb" 
+        textWrap="true" 
+        marginLeft='5%' 
+        width="80%"
+        horizontalAlignment="left"></Label>
+      <Label 
+        class="fas" 
+        text="&#xf1da;" 
+        width="20%"
+        fontSize="16"
+        marginLeft="5%"
+        (tap)="backCategories()"
+        *ngIf="isShowBackButton"
+        horizontalAlignment="right"></Label>
+    </StackLayout>
+      <ListView
+        [items]="categories[categories.length - 1].subCategories" 
+        class="list-group"
+        *ngIf="categories.length > 0"
+        row="1"
+        (itemTap)='onItemTap($event)'>
+        <ng-template  let-item="item" let-i="index">
+          <GridLayout>
+            <label [text]="item.name"></label>
+          </GridLayout>
+        </ng-template>
+      </ListView>
+  </GridLayout>
+  
+  
 </GridLayout>

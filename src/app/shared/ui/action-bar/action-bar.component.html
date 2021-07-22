@@ -1,0 +1,13 @@
+<ActionBar class="action-bar">
+    <NavigationButton visibility="hidden"></NavigationButton>
+    <GridLayout columns="50, 100, *">
+        <Label class="action-bar-title" [text]="text" colSpan="3"></Label>
+        <Label 
+            class="fas" 
+            text="&#xf3e5;" 
+            colSpan="2" 
+            *ngIf="showBackButton"
+            (tap)="onGoBack()"></Label>
+        <Label class="fas" text="&#xf0c9;" (tap)="onToggleMenu()"></Label>
+    </GridLayout>
+</ActionBar>

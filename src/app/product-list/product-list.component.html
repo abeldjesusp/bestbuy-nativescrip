@@ -1,0 +1,64 @@
+<ns-action-bar text="Product List" showBackButton="true"></ns-action-bar>
+
+<GridLayout class="page__content">
+  <ActivityIndicator [busy]="isBusy">
+  </ActivityIndicator>
+  
+  <GridLayout rows="50, *, 90" >
+    <StackLayout row="0" orientation="horizontal" marginTop="5">
+      <Label  
+        [text]="breadCrumb" 
+        textWrap="true" 
+        marginLeft='5%' 
+        width="90%"
+        horizontalAlignment="left"></Label>
+    </StackLayout>
+      <ListView
+        [items]="products.products"
+        *ngIf="products.total > 0"
+        row="1"
+        (itemTap)='onItemTap($event)'>
+
+        <ng-template  let-item="item" let-i="index">
+          <GridLayout rows="30, *">
+            <Label 
+              row="0" 
+              text="!!!Free Shipping!!!" 
+              textAlignment="center" 
+              color="white"
+              backgroundColor="red"
+              *ngIf="item.freeShipping"
+              class="free-shipping"></Label>
+            <StackLayout row="1" orientation="horizontal">
+             
+              <StackLayout width="40%">
+                  <Image [src]="item.image"></Image>
+                
+              </StackLayout>
+              <StackLayout width="60%">
+                <Label [text]="item.name" textWrap="true"></Label>
+                <Label [text]="item.onSale ? '$ '+item.salePrice : '$ '+item.regularPrice" textWrap="true" [ngStyle]="{ 'color': item.onSale ? 'red' : 'black' }"></Label>
+                <Label *ngIf="item.customerReviewAverage" [text]="'Avg User Rating: '+item.customerReviewAverage" textWrap="true"></Label>
+              </StackLayout>
+            </StackLayout>
+          </GridLayout>
+        </ng-template>
+
+      </ListView>
+      <FlexboxLayout 
+        row="2" 
+        justifyContent="space-between"
+        *ngIf="products.total > 0"
+        width="90%">
+          <Label [text]="'Page '+products.currentPage +' of '+products.totalPages"></Label>
+          <ListPicker
+            [items]="pagesNumber" 
+            class="picker"
+            selectedIndex="0"
+            (selectedIndexChange)="onSelectedIndexChanged($event)"></ListPicker>
+          
+      </FlexboxLayout>
+  </GridLayout>
+  
+  
+</GridLayout>
